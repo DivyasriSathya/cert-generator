@@ -1,4 +1,4 @@
-
+gunicorn
 reportlab
 google-generativeai
 pandas
