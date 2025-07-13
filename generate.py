@@ -12,9 +12,12 @@ from reportlab.platypus import Paragraph, Frame
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.utils import simpleSplit
-# Register fonts (adjust path if needed)
-pdfmetrics.registerFont(TTFont('Roboto-Bold', 'assets/fonts/Roboto-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('Roboto-Regular', 'assets/fonts/Roboto-Regular.ttf'))
+# Absolute base directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Absolute asset folder paths
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+FONTS_DIR = os.path.join(ASSETS_DIR, "fonts")
 
 OUTPUT_DIR = "output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -77,21 +80,21 @@ def draw_certificate(name, cert_type, event_title, event_date):
     center_x = (width + 150) / 2
 
     try:
-        c.drawImage("assets/logo_gsss.png",
+        c.drawImage(os.path.join(ASSETS_DIR, "logo_gsss.png"),
                     center_x - (banner_width / 2) - logo_width - 5,
                     logo_y,
                     width=logo_width - 5,
                     height=logo_height,
                     mask='auto')
 
-        c.drawImage("assets/gsssietw_name.png",
+        c.drawImage(os.path.join(ASSETS_DIR, "gsssietw_name.png"),
                     center_x - (banner_width / 2),
                     logo_y + 5,
                     width=banner_width,
                     height=banner_height,
                     mask='auto')
 
-        c.drawImage("assets/logo_aiml.png",
+        c.drawImage(os.path.join(ASSETS_DIR, "logo_aiml.png"),
                     center_x + (banner_width / 2) + 5,
                     logo_y - 5,
                     width=logo_width + 15,
@@ -127,7 +130,7 @@ def draw_certificate(name, cert_type, event_title, event_date):
         gcc_logo_size = 200
         logo_x = badge_center_x - gcc_logo_size / 2
         logo_y = (badge_top + badge_bottom) / 2 - gcc_logo_size / 2 + 10  # Center logo vertically in badge
-        c.drawImage("assets/logo_gcc.png", logo_x, logo_y, width=gcc_logo_size, height=gcc_logo_size, mask='auto')
+        c.drawImage(os.path.join(ASSETS_DIR, "logo_gcc.png"), logo_x, logo_y, width=gcc_logo_size, height=gcc_logo_size, mask='auto')
 
     except Exception as e:
         print(f"⚠️ Pentagon badge error: {e}")
@@ -159,10 +162,10 @@ def draw_certificate(name, cert_type, event_title, event_date):
 
         # Map cert_type to image paths
         ribbon_images = {
-            "Participation": "assets/participation_ribbon.png",
-            "Appreciation": "assets/appreciation_ribbon.png",
-            "Winner": "assets/winner_ribbon.png",
-            "Runner": "assets/runner_ribbon.png"
+            "Participation": os.path.join(ASSETS_DIR, "participation_ribbon.png"),
+            "Appreciation": os.path.join(ASSETS_DIR, "appreciation_ribbon.png"),
+            "Winner": os.path.join(ASSETS_DIR, "winner_ribbon.png"),
+            "Runner": os.path.join(ASSETS_DIR, "runner_ribbon.png")
         }
 
         # Get corresponding image path, default to participation if not found
