@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certificate Generator</title>
+    <style>
+        body { font-family: Arial; padding: 40px; background-color: #f0f0f0; }
+        form { background: white; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; }
+        input, select { width: 100%; padding: 10px; margin-bottom: 15px; }
+        button { padding: 10px 20px; background-color: #2196F3; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Generate Certificate</h2>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Participant Name" required>
+        <select name="cert_type" required>
+            <option value="Participation">Participation</option>
+            <option value="Appreciation">Appreciation</option>
+            <option value="Winner">Winner</option>
+            <option value="Runner-up">Runner-up</option>
+        </select>
+        <input type="text" name="event_title" placeholder="Event Title" required>
+        <label for="event_date">Event Date:</label>
+<input type="date" id="event_date" name="event_date" required>
+<br><br>
+
+        <button type="submit">Generate Certificate</button>
+    </form>
+</body>
+</html>
